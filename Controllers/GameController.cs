@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Connect4_Web_Project.Models.Board;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace Connect4_Web_Project.Controllers
         // GET: Game
         public ActionResult Index()
         {
+            Board b = new Board();
             return View();
         }
 

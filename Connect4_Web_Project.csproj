@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -98,6 +99,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Board\Board.cs" />
+    <Compile Include="Models\Game\Game.cs" />
     <Compile Include="Models\Players\Computer.cs" />
     <Compile Include="Models\Players\Difficulties\Difficulty.cs" />
     <Compile Include="Models\Players\Human.cs" />
@@ -108,6 +111,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,7 +125,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
     <Folder Include="Shared\" />
-    <Folder Include="Views\Game\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
