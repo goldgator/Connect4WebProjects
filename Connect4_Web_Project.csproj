@@ -98,8 +98,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Misc\Utilties.cs" />
     <Compile Include="Models\Players\Computer.cs" />
     <Compile Include="Models\Players\Difficulties\Difficulty.cs" />
+    <Compile Include="Models\Players\Difficulties\Easy.cs" />
+    <Compile Include="Models\Players\Difficulties\Hard.cs" />
+    <Compile Include="Models\Players\Difficulties\Impossible.cs" />
+    <Compile Include="Models\Players\Difficulties\Medium.cs" />
     <Compile Include="Models\Players\Human.cs" />
     <Compile Include="Models\Players\Online.cs" />
     <Compile Include="Models\Players\Player.cs" />

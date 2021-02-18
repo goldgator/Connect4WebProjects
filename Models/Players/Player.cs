@@ -9,7 +9,14 @@ namespace Connect4_Web_Project.Models.Players
     {
         //Make a property/field that resembles a profile
 
-        public abstract int MakeMove(int[][] grid);
+        public int PlayerNum { get; set; }
+
+        /// <summary>
+        /// Returns the column this player chose
+        /// </summary>
+        /// <param name="grid">The game grid representing the board</param>
+        /// <returns></returns>
+        public abstract int MakeMove(int[,] grid);
 
     }
 }
