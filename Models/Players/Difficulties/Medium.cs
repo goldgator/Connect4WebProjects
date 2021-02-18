@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Connect4_Web_Project.Models.Players
+namespace Connect4_Web_Project.Models.Players.Difficulties
 {
-    public class Human : Player
+    public class Medium : Difficulty
     {
-        public override int MakeMove(int[,] grid)
+        public override int DetermineChoice()
         {
             return 0;
         }
