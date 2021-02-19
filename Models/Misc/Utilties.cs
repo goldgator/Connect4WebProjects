@@ -20,7 +20,7 @@ namespace Connect4_Web_Project.Models.Misc
         public static int FindFirstMatchingSpot(int[,] grid, int value, int col)
         {
             //Start from the bottom
-            for (int row = grid.GetLength(0); row > -1; row--)
+            for (int row = grid.GetLength(0) - 1; row > -1; row--)
             {
                 if (grid[row,col] == value)
                 {

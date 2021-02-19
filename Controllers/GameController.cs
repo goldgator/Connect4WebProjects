@@ -13,6 +13,7 @@ namespace Connect4_Web_Project.Controllers
         public ActionResult Index()
         {
             Board b = new Board();
+            Console.WriteLine(b.ToString());
             return View();
         }
 
