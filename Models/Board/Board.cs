@@ -31,6 +31,11 @@ namespace Connect4_Web_Project.Models.Board
             return true;
         }
 
+        public int CheckSquare(int row, int col)
+        {
+            return board[row, col];
+        }
+
         public override string ToString()
         {
             string boardString = "";
