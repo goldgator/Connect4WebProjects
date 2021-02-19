@@ -9,7 +9,7 @@ namespace Connect4_Web_Project.Models.Misc
 {
     public static class Utilties
     {
-        
+
         /// <summary>
         /// Searches the column from the bottom up for the first piece of the grid matching the value passed in
         /// </summary>
@@ -20,9 +20,9 @@ namespace Connect4_Web_Project.Models.Misc
         public static int FindFirstMatchingSpot(int[,] grid, int value, int col)
         {
             //Start from the bottom
-            for (int row = grid.GetLength(0); row > -1; row--)
+            for (int row = grid.GetLength(0) - 1; row > -1; row--)
             {
-                if (grid[row,col] == value)
+                if (grid[row, col] == value)
                 {
                     return row;
                 }
@@ -43,7 +43,7 @@ namespace Connect4_Web_Project.Models.Misc
             return FindFirstMatchingSpot(grid, 0, col);
         }
 
-        
+
         /// <summary>
         /// Find a match within a 2d int array passing in the row and col index of the starting piece, with the value you wish to find a match for. rowShift and colShift CANNOT be both zero.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Connect4_Web_Project.Models.Misc
 
             int row = startRow;
             int col = startCol;
-            
+
             //for loop that will run twice, flipping the sign on the second loop
             for (int flip = 1; flip >= -1; flip -= 2)
             {
@@ -74,10 +74,12 @@ namespace Connect4_Web_Project.Models.Misc
                     if (col >= grid.GetLength(1) || col < 0) break;
 
                     //If piece of grid equals the value passed in, increment count
-                    if (grid[row,col] == value)
+                    if (grid[row, col] == value)
                     {
                         matchCount++;
-                    } else {
+                    }
+                    else if (i != 0)
+                    {
                         break;
                     }
 
@@ -90,8 +92,8 @@ namespace Connect4_Web_Project.Models.Misc
                 if (!reverse) break;
 
                 //Restart row and col AND shift so it doesn't count starter piece twice
-                row = startRow + (rowShift * flip);
-                col = startCol + (colShift * flip);
+                row = row + (rowShift * flip);
+                col = col + (colShift * flip);
             }
 
             return (matchCount >= matchAmount);
@@ -100,13 +102,27 @@ namespace Connect4_Web_Project.Models.Misc
         public static bool FindConnect4Win(int[,] grid, int startRow, int startCol, int value)
         {
             // <-> Horizontal <->
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, 0, 4)) return true;
-            //  | Vertical | 
             if (FindLinearMatch(grid, startRow, startCol, value, 0, 1, 4)) return true;
+            //  | Vertical | 
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 0, 4)) return true;
             //  / Diagnol-up /
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, 1, 4)) return true;
+            if (FindLinearMatch(grid, startRow, startCol, value, -1, 1, 4)) return true;
             //  \ Diagnol-down \
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, -1, 4)) return true;
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 1, 4)) return true;
+
+            return false;
+        }
+
+        public static bool FindConnect4Win(int[,] grid, int startRow, int startCol, int value, int matchAmount)
+        {
+            // <-> Horizontal <->
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 0, matchAmount)) return true;
+            //  | Vertical | 
+            if (FindLinearMatch(grid, startRow, startCol, value, 0, 1, matchAmount)) return true;
+            //  / Diagnol-up /
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 1, matchAmount)) return true;
+            //  \ Diagnol-down \
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, -1, matchAmount)) return true;
 
             return false;
         }
