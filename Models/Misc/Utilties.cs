@@ -69,6 +69,12 @@ namespace Connect4_Web_Project.Models.Misc
             {
                 for (int i = 0; i <= matchAmount; i++)
                 {
+                    if (flip == -1)
+                    {
+                        //Set i to 1 if its been flipped and not checking the starter piece
+                        i = 1;
+                    }
+
                     //Determine if row or col are out of bounds, break if so
                     if (row >= grid.GetLength(0) || row < 0) break;
                     if (col >= grid.GetLength(1) || col < 0) break;
@@ -92,8 +98,8 @@ namespace Connect4_Web_Project.Models.Misc
                 if (!reverse) break;
 
                 //Restart row and col AND shift so it doesn't count starter piece twice
-                row = row + (rowShift * flip);
-                col = col + (colShift * flip);
+                row = startRow + (rowShift * flip * -1);
+                col = startCol + (colShift * flip * -1);
             }
 
             return (matchCount >= matchAmount);
@@ -116,13 +122,13 @@ namespace Connect4_Web_Project.Models.Misc
         public static bool FindConnect4Win(int[,] grid, int startRow, int startCol, int value, int matchAmount)
         {
             // <-> Horizontal <->
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, 0, matchAmount)) return true;
-            //  | Vertical | 
             if (FindLinearMatch(grid, startRow, startCol, value, 0, 1, matchAmount)) return true;
+            //  | Vertical | 
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 0, matchAmount)) return true;
             //  / Diagnol-up /
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, 1, matchAmount)) return true;
+            if (FindLinearMatch(grid, startRow, startCol, value, -1, 1, matchAmount)) return true;
             //  \ Diagnol-down \
-            if (FindLinearMatch(grid, startRow, startCol, value, 1, -1, matchAmount)) return true;
+            if (FindLinearMatch(grid, startRow, startCol, value, 1, 1, matchAmount)) return true;
 
             return false;
         }

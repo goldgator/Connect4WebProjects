@@ -21,7 +21,7 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             int[,] grid = botPlayer.getInternalGrid();
             int height = grid.GetLength(0);
             int width = grid.GetLength(1);
-            basePriorityGrid = CreateBasePriorityGrid(height,width);
+            basePriorityGrid = CreateBasePriorityGrid(height, width);
             columnPriorities = new int[width];
         }
 
@@ -41,18 +41,28 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                     highestPriority = columnPriorities[col];
                     choices.Clear();
                     choices.Add(col);
-                } else if (columnPriorities[col] == highestPriority)
+                }
+                else if (columnPriorities[col] == highestPriority)
                 {
                     choices.Add(col);
                 }
             }
+
+            //DEBUG, PRINT COLUMNPRIORITIES
+            string debug = "";
+            for (int col = 0; col < columnPriorities.Length; col++)
+            {
+                debug += columnPriorities[col] + ", ";
+            }
+            Console.WriteLine(debug);
 
             //Return random spot if multiple share max priority, return -1 if it somehow got now choices
             if (choices.Count > 0)
             {
                 Random rng = new Random();
                 return choices[rng.Next(choices.Count)];
-            } else
+            }
+            else
             {
                 return -1;
             }
@@ -64,8 +74,8 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             int[,] newGrid = new int[baseHeight, baseWidth];
 
             //Add priorities, lower spots have higher priority
-                //Lower spots have higher priority
-                //Middle spots have higher priority
+            //Lower spots have higher priority
+            //Middle spots have higher priority
             for (int col = 0; col < baseWidth; col++)
             {
                 for (int row = 0; row < baseHeight; row++)
@@ -74,7 +84,7 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                     newGrid[row, col] += row;
 
                     //Middle value of row rounded down
-                    int middle = (int) Math.Floor(baseWidth / 2d);
+                    int middle = (int)Math.Floor(baseWidth / 2d);
                     //Applies [0, 1, 2, 3, 2, 1, 0] to each row on a traditional board
                     newGrid[row, col] += (int)(middle - Math.Abs(middle - col));
 
@@ -102,6 +112,12 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             //Add base priority grid
             for (int col = 0; col < grid.GetLength(1); col++)
             {
+                //DEBUG: CATCHES COL AT CERTAIN VALUE
+                if (col == 6)
+                {
+                    int blah = 0;
+                }
+
                 int row = Utilties.FindEmptySpot(grid, col);
                 if (row == -1) continue;
 
@@ -111,10 +127,16 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             //Check for wins in each column (100 value if win)
             for (int col = 0; col < grid.GetLength(1); col++)
             {
+                //DEBUG: CATCHES COL AT CERTAIN VALUE
+                if (col == 5)
+                {
+                    int blah = 0;
+                }
+
                 int row = Utilties.FindEmptySpot(grid, col);
                 if (row == -1) continue;
 
-                if (Utilties.FindConnect4Win(grid, row, col, botPlayer.pieceKey,3))
+                if (Utilties.FindConnect4Win(grid, row, col, botPlayer.pieceKey, 3))
                 {
                     columnPriorities[col] += 100;
                 }
@@ -123,10 +145,18 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             //Check for opponent wins (50 value each match)
             for (int player = 1; player <= 4; player++)
             {
+
+
                 if (player == botPlayer.pieceKey) continue;
 
                 for (int col = 0; col < grid.GetLength(1); col++)
                 {
+                    //DEBUG: CATCHES COL AT CERTAIN VALUE
+                    if (col == 6)
+                    {
+                        int blah = 0;
+                    }
+
                     int row = Utilties.FindEmptySpot(grid, col);
                     if (row == -1) continue;
 
@@ -140,6 +170,12 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             //Determine the priority by finding nearby spaces of same color (1 each)
             for (int col = 0; col < grid.GetLength(1); col++)
             {
+                //DEBUG: CATCHES COL AT CERTAIN VALUE, PUT BREAKPOINT ON BLAH
+                if (col == 6)
+                {
+                    int blah = 0;
+                }
+
                 int newRow, newCol;
 
                 int startRow = Utilties.FindEmptySpot(grid, col);
@@ -158,7 +194,7 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                     if (newRow < 0 || newRow >= grid.GetLength(0)) continue;
                     if (newCol < 0 || newCol >= grid.GetLength(1)) continue;
 
-                    if (grid[newRow,newCol] == botPlayer.pieceKey)
+                    if (grid[newRow, newCol] == botPlayer.pieceKey)
                     {
                         columnPriorities[col]++;
                     }
@@ -170,11 +206,17 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             {
                 if (player == botPlayer.pieceKey) continue;
 
-                //Counts pieces of current player
-                int pieceCount = 0;
-
                 for (int col = 0; col < grid.GetLength(1); col++)
                 {
+                    //DEBUG: CATCHES COL AT CERTAIN VALUE
+                    if (col == 6)
+                    {
+                        int blah = 0;
+                    }
+
+                    //Counts pieces of current player
+                    int pieceCount = 0;
+
                     int newRow, newCol;
 
                     int startRow = Utilties.FindEmptySpot(grid, col);
@@ -206,6 +248,8 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                 }
             }
         }
+
+
 
     }
 }
