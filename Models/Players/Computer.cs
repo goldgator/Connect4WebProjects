@@ -12,6 +12,20 @@ namespace Connect4_Web_Project.Models.Players
         private int[,] internalGrid;
         private Difficulty difficulty;
 
+        //The key used to determine it's piece on the board
+        public int pieceKey { get; set; } = 2;
+
+
+
+        public Computer(int newPieceKey, Difficulty newDifficulty, int[,] newInternalGrid)
+        {
+            pieceKey = newPieceKey;
+            difficulty = newDifficulty;
+            internalGrid = newInternalGrid;
+
+            difficulty.Instantiate(this);
+        }
+
         public override int MakeMove(int[,] grid)
         {
             //Update internal grid
