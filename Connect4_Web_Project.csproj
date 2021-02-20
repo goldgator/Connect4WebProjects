@@ -89,6 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\connect4.gif" />
+    <Content Include="Images\Welcome.jpg" />
+    <Content Include="Images\GetTheRow.jpg" />
+    <Content Include="Images\Player1Move.jpg" />
+    <Content Include="Images\Player2Move.jpg" />
+    <Content Include="Images\RandomSelect.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +119,10 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\SharedData\_LayoutPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
+    <Content Include="Views\Home\HowToPlay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,10 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Images\" />
     <Folder Include="Shared\" />
     <Folder Include="Views\Game\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
