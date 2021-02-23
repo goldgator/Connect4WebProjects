@@ -85,5 +85,15 @@ namespace Connect4_Web_Project.Controllers
                 return View();
             }
         }
+
+        public ActionResult HowToPlay()
+        {
+            return View("HowToPlay");
+        }
+
+        public ActionResult Credits()
+        {
+            return View("Credits");
+        }
     }
 }
