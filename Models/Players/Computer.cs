@@ -26,6 +26,10 @@ namespace Connect4_Web_Project.Models.Players
             difficulty.Instantiate(this);
         }
 
+        public Computer()
+        {
+        }
+
         public override int MakeMove(int[,] grid)
         {
             //Update internal grid

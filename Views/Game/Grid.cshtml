@@ -1,0 +1,20 @@
+﻿@model Connect4_Web_Project.Models.Board.Board
+
+<center>
+    <h2>
+        @{
+            var boardArray = ViewBag.MyBoard;
+
+            for (int row = 0; row < boardArray.GetLength(0); row++)
+            {
+                <tr>
+                    @for (int col = 0; col < boardArray.GetLength(1); col++)
+                    {
+                        <td>@boardArray[row, col] </td>
+                    }
+                    <br />
+                </tr>
+            }
+        }
+    </h2>
+</center>
