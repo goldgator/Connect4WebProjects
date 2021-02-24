@@ -14,6 +14,7 @@ namespace Connect4_Web_Project.Controllers
         {
             Board b = new Board();
             Console.WriteLine(b.ToString());
+
             return View();
         }
 

@@ -90,6 +90,8 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\LookAtTheBoard.jpg" />
+    <Content Include="Images\PieceChoice.jpg" />
     <Content Include="Images\connect4.gif" />
     <Content Include="Images\Welcome.jpg" />
     <Content Include="Images\GetTheRow.jpg" />
@@ -138,11 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Images\" />
+    <Folder Include="Models\Profile\" />
     <Folder Include="Shared\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Game\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
