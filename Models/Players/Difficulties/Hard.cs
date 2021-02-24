@@ -248,8 +248,5 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                 }
             }
         }
-
-
-
     }
 }
