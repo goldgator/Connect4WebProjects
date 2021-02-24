@@ -1,4 +1,6 @@
 ﻿using Connect4_Web_Project.Models.Board;
+using Connect4_Web_Project.Models.Players;
+using Connect4_Web_Project.Models.Players.Difficulties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +11,32 @@ namespace Connect4_Web_Project.Controllers
 {
     public class GameController : Controller
     {
+        static Board board = new Board();
+
         // GET: Game
         public ActionResult Index()
         {
-            Board b = new Board();
-            Console.WriteLine(b.ToString());
+            ViewBag.MyBoard = board.GetBoard();
 
             return View();
+        }
+
+        public ActionResult UpdateBoard(string column = "-1")
+        {
+            bool parsed = int.TryParse(column, out int colNumber);
+
+            colNumber -= 1;
+            ViewBag.ColumnNumber = colNumber;
+
+            Human human = new Human();
+            board.PlacePiece(ViewBag.ColumnNumber, 1);
+            
+            Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
+            board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
+
+            ViewBag.MyBoard = board.GetBoard();
+
+            return PartialView("Grid", board);
         }
 
         // GET: Game/Details/5

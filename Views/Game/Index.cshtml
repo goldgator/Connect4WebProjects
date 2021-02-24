@@ -1,10 +1,30 @@
-﻿
+﻿@model Connect4_Web_Project.Models.Board.Board
+
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/SharedData/_LayoutPage.cshtml";
 }
 
-<h2>Connect 4</h2>
 
-@{
-    
-}
+<h2>Game Time</h2>
+
+<center>
+    <input id="txtColInput" type="number" placeholder="Enter Column Number" />
+    <button id="enterCol" type="button">Enter</button>
+
+    <div id="grid">
+        @Html.Partial("Grid", Model)
+    </div>
+</center>
+
+<script type="text/javascript">
+    $(function () {
+        $("#enterCol").click(function () {
+            let text = "UpdateBoard?column=" + $("#txtColInput").val();
+            $.get(text, {}, function (response) {
+                $("#grid").html(response);
+            });
+        });
+    });
+
+</script>
