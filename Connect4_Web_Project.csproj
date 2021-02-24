@@ -105,6 +105,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Game\Turns.cs" />
     <Compile Include="Models\Misc\Utilties.cs" />
     <Compile Include="Models\Board\Board.cs" />
     <Compile Include="Models\Game\Game.cs" />
@@ -129,6 +130,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\HowToPlay.cshtml" />
+    <Content Include="Views\Game\Grid.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -138,11 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Images\" />
     <Folder Include="Shared\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Game\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
