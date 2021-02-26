@@ -11,7 +11,7 @@
                 Login
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                 <div class="form-group">
