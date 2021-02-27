@@ -10,16 +10,46 @@ namespace Connect4_Web_Project.Models.Game
 {
     public class Game
     {
-        List<Player> players = new List<Player>();
+        private List<Player> players = new List<Player>();
+        private Board.Board board = new Board.Board();
+
+        public Board.Board GetBoardInstance()
+        {
+            return board;
+        }
+
+        public bool hasPlayer(string connectionID)
+        {
+            foreach (Player p in players)
+            {
+                if (p.connectionID == connectionID)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+      
+        
         Player human1, human2, computer1, computer2, currentPlayer;
 
-        Board.Board board = new Board.Board();
 
         Guid ID { get; set; }
 
         int turnIndex = 0;
 
         public Game() { }
+
+        public int GetPlayerSize()
+        {
+            return players.Count;
+        }
+
+        public void AddPlayer(Player player)
+        {
+            players.Add(player);
+        }
 
         public void RunGame()
         {
