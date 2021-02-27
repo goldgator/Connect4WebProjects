@@ -1,7 +1,7 @@
 ﻿@model Connect4_Web_Project.Models.Board.Board
 
 <center>
-    <h2>
+    <h1>
         @{
             var boardArray = ViewBag.MyBoard;
 
@@ -10,11 +10,22 @@
                 <tr>
                     @for (int col = 0; col < boardArray.GetLength(1); col++)
                     {
-                        <td>@boardArray[row, col] </td>
+                        if (boardArray[row, col] == 1)
+                        {
+                            <td><img src="~/Images/redChip.png" width="50" height="50" /></td>
+                        }
+                        else if (boardArray[row, col] == 2)
+                        {
+                            <td><img src="~/Images/blueChip.png" width="50" height="50" /></td>
+                        }
+                        else
+                        {
+                            <td><img src="~/Images/blankChip.png" width="50" height="50" /></td>
+                        }
                     }
                     <br />
                 </tr>
             }
         }
-    </h2>
+    </h1>
 </center>

@@ -47,6 +47,7 @@ namespace Connect4_Web_Project.Models.Board
                     //{
                     //    board[r, c] = "~/Images/redChip.png";
                     //}
+
                     boardString += board[r, c] + "";
                 }
                 boardString += "\n";
