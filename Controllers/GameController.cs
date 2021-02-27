@@ -1,4 +1,5 @@
 ﻿using Connect4_Web_Project.Models.Board;
+using Connect4_Web_Project.Models.Game;
 using Connect4_Web_Project.Models.Players;
 using Connect4_Web_Project.Models.Players.Difficulties;
 using System;
@@ -11,28 +12,37 @@ namespace Connect4_Web_Project.Controllers
 {
     public class GameController : Controller
     {
-        static Board board = new Board();
 
+        static Board board = new Board();
+        Game game = new Game();
+        
         // GET: Game
         public ActionResult Index()
         {
-            ViewBag.MyBoard = board.GetBoard();
+            ViewBag.MyBoard = new Board().GetBoard();
+            
+            //game.RunGame();
 
             return View();
         }
 
-        public ActionResult UpdateBoard(string column = "-1")
+        public ActionResult UpdateBoard(string column, string pieceKey, string connectionID)
         {
             bool parsed = int.TryParse(column, out int colNumber);
+            bool pieceParsed = int.TryParse(pieceKey, out int pieceNum);
 
             colNumber -= 1;
             ViewBag.ColumnNumber = colNumber;
 
-            Human human = new Human();
-            board.PlacePiece(ViewBag.ColumnNumber, 1);
+            GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            Board board = lobby.game.GetBoardInstance();
+
             
-            Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
-            board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
+            
+            //Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
+            //board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
+
+            //game.RunGame();
 
             ViewBag.MyBoard = board.GetBoard();
 
