@@ -19,16 +19,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("UC4", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("UC4", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                      <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                      <li>@Html.ActionLink("How To Play", "HowToPlay", "Home")</li>
-                      <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
-                      <li>@Html.ActionLink("Login", "Index", "Login")</li>
-                      <li>@Html.ActionLink("Register", "Register", "Login")</li>
-                  </ul>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Login")</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -39,7 +36,7 @@
             <p>&copy; @DateTime.Now.Year - UltimateConnectFour.com</p>
         </footer>
     </div>
-<script src="~/Scripts/jquery-3.0.0.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

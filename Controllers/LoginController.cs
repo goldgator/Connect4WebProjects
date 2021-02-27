@@ -8,11 +8,14 @@ using Connect4_Web_Project.Models;
 using System.Security.Cryptography;
 using Connect4_Web_Project.Models.Database;
 
+
 namespace Connect4_Web_Project.Controllers
 {
     public class LoginController : Controller
     {
         private Entities _entities = new Entities();
+        private UserLogin userLogin = new UserLogin();
+        private User user = new User();
         // GET: Login
         public ActionResult Index()
         {
@@ -92,7 +95,7 @@ namespace Connect4_Web_Project.Controllers
                     Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
                     Session["Email"] = data.FirstOrDefault().Email;
                     Session["idUser"] = data.FirstOrDefault().idUser;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
