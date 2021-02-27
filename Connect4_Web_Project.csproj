@@ -109,7 +109,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\blueChip.png" />
     <Content Include="Images\connect4.gif" />
+    <Content Include="Images\redChip.png" />
     <Content Include="Images\Welcome.jpg" />
     <Content Include="Images\GetTheRow.jpg" />
     <Content Include="Images\Player1Move.jpg" />
@@ -283,9 +285,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-    <Folder Include="App_Data\" />
-    
-
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
