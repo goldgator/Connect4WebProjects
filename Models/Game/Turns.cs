@@ -10,6 +10,8 @@ namespace Connect4_Web_Project.Models.Game
     {
         //Player player = new Player();
 
+        Player player;
+
         public void BeginTurn()
         {
             //
