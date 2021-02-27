@@ -21,6 +21,12 @@ namespace Connect4_Web_Project.Models.Players
 
         public string Name { get; set; }
 
+        public Human() { }
+        public Human(string name)
+        {
+            Name = name;
+        }
+
         public override int MakeMove(int[,] grid)
         {
             Console.WriteLine("Pick Column to Place Piece");
