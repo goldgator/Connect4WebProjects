@@ -11,28 +11,31 @@ namespace Connect4_Web_Project.Controllers
 {
     public class GameController : Controller
     {
-        static Board board = new Board();
+
 
         // GET: Game
         public ActionResult Index()
         {
-            ViewBag.MyBoard = board.GetBoard();
+            ViewBag.MyBoard = new Board().GetBoard();
 
             return View();
         }
 
-        public ActionResult UpdateBoard(string column = "-1")
+        public ActionResult UpdateBoard(string column, string pieceKey, string connectionID)
         {
             bool parsed = int.TryParse(column, out int colNumber);
+            bool pieceParsed = int.TryParse(pieceKey, out int pieceNum);
 
             colNumber -= 1;
             ViewBag.ColumnNumber = colNumber;
 
-            Human human = new Human();
-            board.PlacePiece(ViewBag.ColumnNumber, 1);
+            GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            Board board = lobby.game.GetBoardInstance();
+
             
-            Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
-            board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
+            
+            //Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
+            //board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
 
             ViewBag.MyBoard = board.GetBoard();
 
