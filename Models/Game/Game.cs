@@ -9,12 +9,40 @@ namespace Connect4_Web_Project.Models.Game
 {
     public class Game
     {
-        List<Player> players = new List<Player>();
-        Board.Board board = new Board.Board();
+        private List<Player> players = new List<Player>();
+        private Board.Board board = new Board.Board();
+
+        public Board.Board GetBoardInstance()
+        {
+            return board;
+        }
+
+        public bool hasPlayer(string connectionID)
+        {
+            foreach (Player p in players)
+            {
+                if (p.connectionID == connectionID)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         Guid ID { get; set; }
 
         public Game() { }
+
+        public int GetPlayerSize()
+        {
+            return players.Count;
+        }
+
+        public void AddPlayer(Player player)
+        {
+            players.Add(player);
+        }
 
         public void StartGame()
         {

@@ -8,7 +8,7 @@ namespace Connect4_Web_Project.Models.Game
 {
     public class Turns
     {
-        Player player = new Player();
+        //Player player;
 
         public void BeginTurn()
         {
@@ -17,10 +17,7 @@ namespace Connect4_Web_Project.Models.Game
 
         public void ExecuteTurn()
         {
-            foreach (Player p in players)
-            {
-                
-            }
+            
         }
 
         public void EndTurn()
