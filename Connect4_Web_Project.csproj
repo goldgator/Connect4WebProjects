@@ -299,6 +299,8 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Game\Grid.cshtml" />
     <Content Include="Views\Profile\ProfileDetails.cshtml" />
+    <Content Include="Views\Game\WinBoard.cshtml" />
+    <Content Include="Views\Game\LoseBoard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

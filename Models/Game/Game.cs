@@ -51,6 +51,12 @@ namespace Connect4_Web_Project.Models.Game
             players.Add(player);
         }
 
+
+        public Player GetPlayer(int index)
+        {
+            return players[index];
+        }
+
         public void RunGame()
         {
             bool quit = false;
@@ -68,6 +74,7 @@ namespace Connect4_Web_Project.Models.Game
         }
 
         public void PlayGame()
+
         {
             currentPlayer = players[0];
             bool gameOver = false;
