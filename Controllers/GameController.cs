@@ -42,6 +42,18 @@ namespace Connect4_Web_Project.Controllers
             return PartialView("Grid", board);
         }
 
+        public ActionResult WinBoard()
+        {
+            return PartialView("WinBoard");
+        }
+
+        public ActionResult LoseBoard(string winnerName)
+        {
+            ViewBag.winner = winnerName;
+
+            return PartialView("LoseBoard");
+        }
+
         // GET: Game/Details/5
         public ActionResult Details(int id)
         {
