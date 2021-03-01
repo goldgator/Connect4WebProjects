@@ -129,6 +129,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\blankChip.png" />
     <Content Include="Images\LookAtTheBoard.jpg" />
     <Content Include="Images\PieceChoice.jpg" />
     <Content Include="Images\blueChip.png" />
