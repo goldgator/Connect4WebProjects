@@ -43,6 +43,11 @@ namespace Connect4_Web_Project.Models.Board
             {
                 for (int c = 0; c < Columns; c++)
                 {
+                    //if (board[r, c] == 1)
+                    //{
+                    //    board[r, c] = "~/Images/redChip.png";
+                    //}
+
                     boardString += board[r, c] + "";
                 }
                 boardString += "\n";

@@ -1,4 +1,5 @@
 ﻿using Connect4_Web_Project.Models.Board;
+using Connect4_Web_Project.Models.Game;
 using Connect4_Web_Project.Models.Players;
 using Connect4_Web_Project.Models.Players.Difficulties;
 using System;
@@ -12,11 +13,15 @@ namespace Connect4_Web_Project.Controllers
     public class GameController : Controller
     {
 
-
+        static Board board = new Board();
+        Game game = new Game();
+        
         // GET: Game
         public ActionResult Index()
         {
             ViewBag.MyBoard = new Board().GetBoard();
+            
+            //game.RunGame();
 
             return View();
         }
@@ -36,6 +41,8 @@ namespace Connect4_Web_Project.Controllers
             
             //Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
             //board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
+
+            //game.RunGame();
 
             ViewBag.MyBoard = board.GetBoard();
 
