@@ -28,7 +28,7 @@ namespace Connect4_Web_Project.Models.Board
             int row = Utilties.FindEmptySpot(board, col);
             board[row, col] = value;
 
-            return true;
+            return Utilties.FindConnect4Win(board, row, col, value);
         }
 
         public int CheckSquare(int row, int col)
