@@ -7,11 +7,6 @@ namespace Connect4_Web_Project.Models.Players
 {
     public class Human : Player
     {
-        public Human()
-        {
-
-        }
-
         public Human(string name, int pieceKey, string newConnectionID)
         {
             Name = name;

@@ -15,6 +15,8 @@
     <div id="grid">
         @Html.Partial("Grid", Model)
     </div>
+
+    <div id="messageBox"></div>
 </center>
 
 <input type="hidden" id="pieceValueHolder" />
@@ -36,6 +38,21 @@
             let text = "Game/UpdateBoard?column=" + colString + "&&pieceKey=" + pieceValue + "&&connectionID=" + $("#connectionIDHolder").val();
             $.get(text, {}, function (response) {
                 $("#grid").html(response);
+            });
+        }
+
+        lobby.client.getWin = function () {
+            let text = "Game/WinBoard";
+                
+            $.get(text, {}, function (response) {
+                $("#messageBox").html(response);
+            });
+        }
+
+        lobby.client.getLose = function (winnerName) {
+            let text = "Game/LoseBoard?winnerName=" + winnerName;
+            $.get(text, {}, function (response) {
+                $("#messageBox").html(response);
             });
         }
 

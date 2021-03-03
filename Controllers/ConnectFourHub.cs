@@ -30,7 +30,18 @@ namespace Connect4_Web_Project.Controllers
             bool colParse = int.TryParse(colString, out int colInput);
             bool pieceParse = int.TryParse(pieceValue, out int pieceKey);
 
-            board.PlacePiece(colInput, pieceKey);
+            bool win = board.PlacePiece(colInput - 1, pieceKey);
+
+            if (win)
+            {
+                //Call win board
+                Clients.Caller.getWin();
+
+                //Call lose board
+                Clients.OthersInGroup(groupName).getLose(lobby.game.GetPlayer(pieceKey-1).connectionID);
+            }
+
+
 
             Clients.Group(groupName).broadcastMessage(colString, pieceValue);
             
