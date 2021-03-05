@@ -298,11 +298,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Game\Grid.cshtml" />
     <Content Include="Views\Profile\ProfileDetails.cshtml" />
+
+    <Content Include="Views\SharedData\_LayoutLoginAndRegister.cshtml" />
     <Content Include="Views\Game\WinBoard.cshtml" />
     <Content Include="Views\Game\LoseBoard.cshtml" />
     <None Include="Web.Debug.config">
