@@ -5,76 +5,52 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/CSS/layout.css" rel="stylesheet" type="text/css" />
 
 
 </head>
 <body>
-    @* Original Drop down
-        -----------------------------------------------------------------------------------------------------
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Ultimate Connect Four", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("How To Play", "HowToPlay", "Home")</li>
-                        <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        -------------------------------------------------------------------------------------------------
-        Current Dropdown*@
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Ultimate Connect Four
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="~/Home/Index">Home</a>
-                        <a class="dropdown-item" style="font-weight: bold" href="~/">Play!</a>
-                        <a class="dropdown-item" href="~/Home/HowToPlay">How to Play</a>
-                        <a class="dropdown-item" href="~/Home/Credits">Credits</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
 
-    @*-----------------------------------------------------------------------------------------------------*@
-    <hr style="text-align:left;margin-left:0; border-color: black">
+    @*<nav class="navbar navbar-light bg-light">
+            <a href="~/Home">
+                <img src="~/Images/connect4Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Ultimate Connect Four
+            </a>
+
+        </nav>*@
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+    <div class="navbar d-flex justify-content-start">
+
+        <a href="~/Home"><i class="bi bi-house"></i> Home</a>
+        <a  href="~/game"><i class="bi bi-controller"></i> Play Connect Four</a>
+        <a href="~/Home/HowToPlay"><i class="bi bi-patch-question"></i> How to Play</a>
+        <a href="~/Home/Credits"><i class="bi bi-info-circle"></i> About</a>
+    </div>
+
+
+
+    
 
     <div class="container body-content">
         @RenderBody()
-        <hr style="text-align:left;margin-left:0; border-color: black">
-        <footer>
+
+        <footer style="padding-top: 250px;">
 
             <p>&copy; @DateTime.Now.Year - UltimateConnectFour.com</p>
         </footer>
     </div>
 
-<script src="~/Scripts/jquery-3.0.0.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
 
 </body>
