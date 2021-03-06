@@ -21,10 +21,17 @@ namespace Connect4_Web_Project.Controllers
             
         }
 
-        //Method that is run when a user attempts to place a piece
+        public void SendChatMessage(string name, string message)
+        {
+            string connectionID = Context.ConnectionId;
+            GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            string groupName = lobby.lobbyName;
+
+            Clients.Group(groupName).addNewMessageToPage(name, message);
+        }
+
         public void SendColGroup(string colString, string pieceValue)
         {
-
             string connectionID = Context.ConnectionId;
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
             string groupName = lobby.lobbyName;
@@ -82,9 +89,7 @@ namespace Connect4_Web_Project.Controllers
                 }
 
                 lobby.game.NextTurn();
-            };
-
-            
+            }; 
 
             Clients.Group(groupName).updateBoard();
             
@@ -94,13 +99,17 @@ namespace Connect4_Web_Project.Controllers
                 Clients.Client(lobby.game.GetPlayer(lobby.game.TurnInt).connectionID).giveInputAccess();
                 
             }
-
         }
 
         public override Task OnConnected()
         {
             /*GroupManager.Lobby lobby = GroupManager.FindOpenLobby();
             JoinRoom(lobby.lobbyName);
+
+            int pieceKey = lobby.game.GetPlayerSize() + 1;
+            string pieceString = pieceKey + "";
+            Clients.Caller.setData(pieceString, Context.ConnectionId);
+            lobby.game.AddPlayer(new Human(Context.ConnectionId, pieceKey, Context.ConnectionId));
             int pieceKey = lobby.game.GetPlayerSize() + 1;
             string pieceString = pieceKey + "";
             Clients.Caller.setData(pieceString, Context.ConnectionId);
@@ -111,6 +120,7 @@ namespace Connect4_Web_Project.Controllers
                 Clients.OthersInGroup(lobby.lobbyName).giveInputAccess();
             }*/
             
+
 
             return base.OnConnected();
         }

@@ -134,17 +134,22 @@
     <Content Include="CSS\howToPlay.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\blankChip.png" />
+    <Content Include="Images\greenChip.png" />
     <Content Include="Images\downArrow.png" />
     <Content Include="Images\LookAtTheBoard.jpg" />
+    <Content Include="Images\orangeChip.png" />
     <Content Include="Images\PieceChoice.jpg" />
     <Content Include="Images\blueChip.png" />
     <Content Include="Images\connect4.gif" />
+    <Content Include="Images\pinkChip.png" />
+    <Content Include="Images\purpleChip.png" />
     <Content Include="Images\redChip.png" />
     <Content Include="Images\Welcome.jpg" />
     <Content Include="Images\GetTheRow.jpg" />
     <Content Include="Images\Player1Move.jpg" />
     <Content Include="Images\Player2Move.jpg" />
     <Content Include="Images\RandomSelect.jpg" />
+    <Content Include="Images\yellowChip.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -246,6 +251,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Game\Hub.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
