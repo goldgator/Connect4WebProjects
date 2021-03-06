@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Connect4_Web_Project.Models.Misc;
 
 namespace Connect4_Web_Project.Models.Players.Difficulties
 {
@@ -24,7 +25,7 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             do
             {
                 choice = rng.Next(0, internalGrid.GetLength(1));
-            } while (internalGrid[0, choice] == 0);
+            } while ((Utilties.FindEmptySpot(internalGrid,choice) == -1));
 
 
             return choice;
