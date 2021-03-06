@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Owin;
 
@@ -12,6 +13,7 @@ namespace Connect4_Web_Project.Startup
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
+            GlobalHost.Configuration.DisconnectTimeout = TimeSpan.FromSeconds(6);
         }
     }
 }

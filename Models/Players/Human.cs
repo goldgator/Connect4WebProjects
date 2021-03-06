@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Connect4_Web_Project.Models.Misc;
 
 namespace Connect4_Web_Project.Models.Players
 {
@@ -14,7 +15,13 @@ namespace Connect4_Web_Project.Models.Players
             connectionID = newConnectionID;
         }
 
-        public string Name { get; set; }
+        public Human(int pieceKey, string newConnectionID)
+        {
+            Name = Utilties.RandomName;
+            PlayerNum = pieceKey;
+            connectionID = newConnectionID;
+        }
+
 
         public Human() { }
         public Human(string name)

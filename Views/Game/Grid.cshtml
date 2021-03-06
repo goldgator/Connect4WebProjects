@@ -5,6 +5,28 @@
         @{
             var boardArray = ViewBag.MyBoard;
 
+            @*Put all the board selections on screen if it is their turn*@
+            if (ViewBag.IsTurn)
+            {
+                <tr>
+                    @for (int col = 0; col < boardArray.GetLength(1); col++)
+                    {
+                        <td><input type="image" class="placePieceButton" value="@col" src="~/Images/downArrow.png" width="50" height="50" /></td>
+                    }
+                </tr>
+                <br />
+            }
+            else
+            {
+                <tr>
+                    @for (int col = 0; col < boardArray.GetLength(1); col++)
+                    {
+                        <td><div width="50" height="50"></div></td>
+                    }
+                </tr>
+                <br />
+            }
+
             for (int row = 0; row < boardArray.GetLength(0); row++)
             {
                 <tr>

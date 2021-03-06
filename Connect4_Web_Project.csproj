@@ -130,6 +130,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\blankChip.png" />
+    <Content Include="Images\downArrow.png" />
     <Content Include="Images\LookAtTheBoard.jpg" />
     <Content Include="Images\PieceChoice.jpg" />
     <Content Include="Images\blueChip.png" />
@@ -301,6 +302,7 @@
     <Content Include="Views\Profile\ProfileDetails.cshtml" />
     <Content Include="Views\Game\WinBoard.cshtml" />
     <Content Include="Views\Game\LoseBoard.cshtml" />
+    <Content Include="Views\Game\PlayButtons.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

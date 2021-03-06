@@ -10,6 +10,28 @@ namespace Connect4_Web_Project.Models.Misc
     public static class Utilties
     {
 
+        public static string[] names =
+        {
+            "Morty",
+            "Rick",
+            "Zorb",
+            "Bob",
+            "Cameron",
+            "Corey",
+            "Jesse",
+            "Ethan",
+            "Tyler",
+            "Hank",
+            "York",
+            "Terminator"
+        };
+
+        public static string RandomName {
+            get
+            {
+                return names[new Random().Next(names.Length)];
+            }
+        }
         /// <summary>
         /// Searches the column from the bottom up for the first piece of the grid matching the value passed in
         /// </summary>
