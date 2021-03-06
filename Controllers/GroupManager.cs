@@ -34,7 +34,7 @@ namespace Connect4_Web_Project.Controllers
 
             //IF no lobbies are open
             Lobby lobby = new Lobby();
-            lobby.id = new Guid();
+            lobby.id = Guid.NewGuid();
             lobby.game = new Game();
 
             lobbies.Add(lobby);

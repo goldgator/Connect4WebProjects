@@ -9,6 +9,11 @@
 <h2>Game Time</h2>
 
 <center>
+    <input id="txtColorChoice" type="text" placeholder="Enter a Piece Color / 1 - Red, 2 - Yellow, 3 - Blue etc." />
+    <button id="enterColor" type="button">Enter</button>
+
+    <br />
+
     <input id="txtColInput" type="number" placeholder="Enter Column Number" />
     <button id="enterCol" type="button">Enter</button>
 
@@ -16,15 +21,23 @@
         @Html.Partial("Grid", Model)
     </div>
 
-    <div id="messageBox"></div>
+    <div id="messageBox">
+    </div>
+
+    <div class="container">
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Send" />
+        <input type="hidden" id="displayname" />
+        <ul id="discussion">
+        </ul>
+    </div>
 </center>
 
 <input type="hidden" id="pieceValueHolder" />
 <input type="hidden" id="connectionIDHolder" />
+<input type="hidden" id="pieceColorHolder" />
 
-
-
-
+<script src="Scripts/jquery-3.0.0.min.js"></script>
 <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
 <script src="signalr/hubs"></script>
 
@@ -41,9 +54,16 @@
             });
         }
 
+        lobby.client.addNewMessageToPage = function (name, message) {
+            var encodedName = $('<div />').text(name).html();
+            var encodedMsg = $('<div />').text(message).html();
+            $('#discussion').html('<li><strong>' + encodedName
+                + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>' + $('#discussion').html());
+        };
+
         lobby.client.getWin = function () {
             let text = "Game/WinBoard";
-                
+
             $.get(text, {}, function (response) {
                 $("#messageBox").html(response);
             });
@@ -61,16 +81,21 @@
             $("#connectionIDHolder").val(connectionID);
         }
 
+        //Dont Prompt. Get Profile Name.
+        $('#displayname').val(prompt('Enter your name:', ''));
+        $('#message').focus();
+
         $.connection.hub.start().done(function () {
             $("#enterCol").click(function () {
                 lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
             });
+
+            $('#sendmessage').click(function () {
+                lobby.server.sendChatMessage($('#displayname').val(), $('#message').val());
+                $('#message').val('').focus();
+            });
         });
-
-        
     });
-
-
 
     //$(function () {
     //    $("#enterCol").click(function () {
@@ -80,5 +105,4 @@
     //        });
     //    });
     //});
-
 </script>

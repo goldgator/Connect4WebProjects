@@ -17,10 +17,17 @@ namespace Connect4_Web_Project.Controllers
             Clients.All.broadcastMessage(colString, pieceValue);
         }
 
+        public void SendChatMessage(string name, string message)
+        {
+            string connectionID = Context.ConnectionId;
+            GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            string groupName = lobby.lobbyName;
+
+            Clients.Group(groupName).addNewMessageToPage(name, message);
+        }
+
         public void SendColGroup(string colString, string pieceValue)
         {
-
-
             string connectionID = Context.ConnectionId;
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
             string groupName = lobby.lobbyName;
@@ -41,10 +48,7 @@ namespace Connect4_Web_Project.Controllers
                 Clients.OthersInGroup(groupName).getLose(lobby.game.GetPlayer(pieceKey-1).connectionID);
             }
 
-
-
-            Clients.Group(groupName).broadcastMessage(colString, pieceValue);
-            
+            Clients.Group(groupName).broadcastMessage(colString, pieceValue);            
         }
 
         public override Task OnConnected()
@@ -52,13 +56,10 @@ namespace Connect4_Web_Project.Controllers
             GroupManager.Lobby lobby = GroupManager.FindOpenLobby();
             JoinRoom(lobby.lobbyName);
 
-           
             int pieceKey = lobby.game.GetPlayerSize() + 1;
             string pieceString = pieceKey + "";
             Clients.Caller.setData(pieceString, Context.ConnectionId);
             lobby.game.AddPlayer(new Human(Context.ConnectionId, pieceKey, Context.ConnectionId));
-            
-            
 
             return base.OnConnected();
         }
