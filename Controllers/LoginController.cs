@@ -42,7 +42,7 @@ namespace Connect4_Web_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check = _entities.Users.FirstOrDefault(s => s.Email == _user.Email);
+                var check = _entities.Users.FirstOrDefault(s => s.Username == _user.Username);
                 if (check == null)
                 {
                     _user.Password = GetMD5(_user.Password);
@@ -53,7 +53,7 @@ namespace Connect4_Web_Project.Controllers
                 }
                 else
                 {
-                    ViewBag.error = "Email already exists";
+                    ViewBag.error = "Username already exists";
                     return View();
                 }
             }
@@ -88,12 +88,12 @@ namespace Connect4_Web_Project.Controllers
             if (ModelState.IsValid)
             {
                 var f_password = GetMD5(_userLogin.Password);
-                var data = _entities.Users.Where(s => s.Email.Equals(_userLogin.Email) && s.Password.Equals(f_password)).ToList();
+                var data = _entities.Users.Where(s => s.Username.Equals(_userLogin.Email) && s.Password.Equals(f_password)).ToList();
                 if (data.Count() > 0)
                 {
                     //add session
                     Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
-                    Session["Email"] = data.FirstOrDefault().Email;
+                    Session["Username"] = data.FirstOrDefault().Username;
                     Session["idUser"] = data.FirstOrDefault().idUser;
                     return RedirectToAction("Index", "Home");
                 }
