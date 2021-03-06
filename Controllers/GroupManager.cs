@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Connect4_Web_Project.Models.Game;
+using Connect4_Web_Project.Models.Players;
 
 namespace Connect4_Web_Project.Controllers
 {
@@ -20,7 +21,7 @@ namespace Connect4_Web_Project.Controllers
             public Game game;
         }
 
-        private static List<Lobby> lobbies = new List<Lobby>();
+        public static List<Lobby> lobbies { get; set; } = new List<Lobby>();
 
         public static Lobby FindOpenLobby()
         {
@@ -36,6 +37,18 @@ namespace Connect4_Web_Project.Controllers
             Lobby lobby = new Lobby();
             lobby.id = Guid.NewGuid();
             lobby.game = new Game();
+
+            lobbies.Add(lobby);
+            return lobby;
+        }
+
+        public static Lobby CreateLobbyWithPlayer(Player player)
+        {
+            Lobby lobby = new Lobby();
+            lobby.id = Guid.NewGuid();
+            lobby.game = new Game();
+
+            lobby.game.AddPlayer(player);
 
             lobbies.Add(lobby);
             return lobby;

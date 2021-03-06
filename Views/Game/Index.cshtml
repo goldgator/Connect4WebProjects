@@ -4,21 +4,34 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/SharedData/_LayoutPage.cshtml";
 }
-
+<link href="~/CSS/game.css" rel="stylesheet" type="text/css" />
 
 <h2>Game Time</h2>
 
 <center>
-    <input id="txtColorChoice" type="text" placeholder="Enter a Piece Color / 1 - Red, 2 - Yellow, 3 - Blue etc." />
-    <button id="enterColor" type="button">Enter</button>
+    @*<input id="txtColInput" type="number" placeholder="Enter Column Number" disabled/>
+    <button id="enterCol" type="button" disabled>Enter</button>*@
 
-    <br />
-
-    <input id="txtColInput" type="number" placeholder="Enter Column Number" />
-    <button id="enterCol" type="button">Enter</button>
-
-    <div id="grid">
-        @Html.Partial("Grid", Model)
+    <div id="grid" style="width: 700px; height: 300px; padding: 20px">
+        @*@Html.Partial("Grid", Model)*@
+        <div style="width: 420px; height: 200px;">
+            <div style="width: 200px; height: 200px; float:left">
+                <button id="findMatchButton" value="Find Match" style="width: 90%; height: 90%">Find Match</button>
+            </div>
+            <div style="width: 200px; height: 200px; float:right">
+                <ul style="list-style:none">
+                    <li>
+                        <button id="easyButton" value="Easy AI"  style="width: 180px; height: 53px; padding: 5%">Easy</button>
+                    </li>
+                    <li>
+                        <button id="mediumButton" value="Medium AI"  style="width: 180px; height: 53px; padding: 5%">Medium</button>
+                    </li>
+                    <li>
+                        <button id="hardButton" value="Hard AI" style="width: 180px; height: 53px; padding: 5%">Hard</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div id="messageBox">
@@ -47,10 +60,14 @@
         var lobby = $.connection.connectFourHub;
 
         //Create a function that the hub can call to broacast messages
-        lobby.client.broadcastMessage = function (colString, pieceValue) {
-            let text = "Game/UpdateBoard?column=" + colString + "&&pieceKey=" + pieceValue + "&&connectionID=" + $("#connectionIDHolder").val();
+        lobby.client.updateBoard = function () {
+            let text = "Game/UpdateBoard?connectionID=" + $("#connectionIDHolder").val();
             $.get(text, {}, function (response) {
                 $("#grid").html(response);
+
+                $(".placePieceButton").click(function () {
+                    lobby.server.sendColGroup(this.value, $("#pieceValueHolder").val());
+                });
             });
         }
 
@@ -61,12 +78,29 @@
                 + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>' + $('#discussion').html());
         };
 
+        lobby.client.giveInputAccess = function () {
+            $("#txtColInput").prop('disabled', false);
+            $("#enterCol").prop('disabled', false);
+        }
+
+        lobby.client.takeInputAccess = function () {
+            $("#txtColInput").prop('disabled', true);
+            $("#enterCol").prop('disabled', true);
+        }
+    
+
+        lobby.client.message = function (text) {
+            $("#messageBox").html(text);
+        }
+
         lobby.client.getWin = function () {
             let text = "Game/WinBoard";
 
             $.get(text, {}, function (response) {
                 $("#messageBox").html(response);
             });
+
+            $.connection.connectFourHub;
         }
 
         lobby.client.getLose = function (winnerName) {
@@ -74,6 +108,16 @@
             $.get(text, {}, function (response) {
                 $("#messageBox").html(response);
             });
+
+            $.connection.connectFourHub;
+        }
+
+        lobby.client.setLoading = function () {
+            $("#messageBox").html("Connecting...");
+            $("#findMatchButton").prop('disabled', true);
+            $("#easyButton").prop('disabled', true);
+            $("#mediumButton").prop('disabled', true);
+            $("#hardButton").prop('disabled', true);
         }
 
         lobby.client.setData = function (pieceValue, connectionID) {
@@ -86,8 +130,20 @@
         $('#message').focus();
 
         $.connection.hub.start().done(function () {
-            $("#enterCol").click(function () {
-                lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
+            //$("#enterCol").click(function () {
+            //    lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
+            //});
+            $("#findMatchButton").click(function () {
+                lobby.server.joinMatchPlayer();
+            });
+            $("#easyButton").click(function () {
+                lobby.server.joinMatchAI("Easy");
+            });
+            $("#mediumButton").click(function () {
+                lobby.server.joinMatchAI("Medium");
+            });
+            $("#hardButton").click(function () {
+                lobby.server.joinMatchAI("Hard");
             });
 
             $('#sendmessage').click(function () {
@@ -96,7 +152,7 @@
             });
         });
     });
-
+  
     //$(function () {
     //    $("#enterCol").click(function () {
     //        let text = "UpdateBoard?column=" + $("#txtColInput").val();
