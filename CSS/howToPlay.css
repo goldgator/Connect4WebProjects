@@ -1,0 +1,24 @@
+﻿<head > {
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css" /> <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css" />
+}
+
+/*h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}*/
+h1 {
+    display: inline;
+}
+
+    h1:after {
+        content: "\a";
+        white-space: pre;
+    }
+
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+}
+
+body {
+    background: url(/Images/cream_dust.png) repeat 0 0;
+}
