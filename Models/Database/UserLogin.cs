@@ -9,7 +9,7 @@ namespace Connect4_Web_Project.Models.Database
     public class UserLogin
     {
         [Required]
-        public string Email { get; set; }
+        public string Username { get; set; }
         [Required]
         public string Password { get; set; }
 
