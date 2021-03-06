@@ -16,7 +16,7 @@ namespace Connect4_Web_Project.Models.Players
 
         public string Name { get; set; }
 
-        public Human() { }
+        //public Human() { }
         public Human(string name)
         {
             Name = name;
