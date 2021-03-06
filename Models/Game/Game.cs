@@ -12,10 +12,44 @@ namespace Connect4_Web_Project.Models.Game
     {
         private List<Player> players = new List<Player>();
         private Board.Board board = new Board.Board();
+        public int TurnInt { get; set; } = 0;
 
         public Board.Board GetBoardInstance()
         {
             return board;
+        }
+
+        /// <summary>
+        /// Removes the player with the current connectionID and returns it
+        /// </summary>
+        /// <param name="connectionID">The connectionID of the player being replaced</param>
+        /// <returns>The player removed</returns>
+        public Player RemovePlayerUsingID(string connectionID)
+        {
+            return RemovePlayerUsingID(connectionID, out int newIndex);
+        }
+
+        public bool IsPlayersTurn(string connectionID)
+        {
+            return connectionID == players[TurnInt].connectionID;
+        }
+
+        public void NextTurn()
+        {
+            TurnInt = (TurnInt + 1) % players.Count;
+        }
+
+        public Player RemovePlayerUsingID(string connectionID, out int removeIndex)
+        {
+            removeIndex = players.FindIndex(ctx => ctx.connectionID == connectionID);
+            Player p = players[removeIndex];
+            players.RemoveAt(removeIndex);
+            return p;
+        }
+
+        public void InsertPlayer(Player newPlayer, int index)
+        {
+            players.Insert(index, newPlayer);
         }
 
         public bool hasPlayer(string connectionID)
@@ -64,7 +98,7 @@ namespace Connect4_Web_Project.Models.Game
             {
                 board.GetBoard();
 
-                human1 = new Human();
+                //human1 = new Human();
                 computer1 = new Computer();
                 players.Add(human1);
                 players.Add(computer1);
