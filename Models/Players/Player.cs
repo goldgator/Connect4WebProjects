@@ -9,6 +9,7 @@ namespace Connect4_Web_Project.Models.Players
     {
         //Make a property/field that resembles a profile
         public string connectionID;
+        public string Name;
         public int PlayerNum { get; set; }
 
         /// <summary>

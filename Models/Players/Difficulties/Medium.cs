@@ -53,7 +53,7 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
             }
             Console.WriteLine(debug);
 
-            //Return random spot if multiple share max priority, return -1 if it somehow got now choices
+            //Return random spot if multiple share max priority, return -1 if it somehow got no choices
             if (choices.Count > 0)
             {
                 Random rng = new Random();
@@ -115,6 +115,15 @@ namespace Connect4_Web_Project.Models.Players.Difficulties
                     {
                         columnPriorities[col] += 50;
                     }
+                }
+            }
+
+            //Check if any columns are full REPLACE that column with a -10
+            for (int col = 0; col < grid.GetLength(1); col++)
+            {
+                if (Utilties.FindEmptySpot(grid, col) == -1)
+                {
+                    columnPriorities[col] = -10;
                 }
             }
         }
