@@ -64,7 +64,7 @@ namespace Connect4_Web_Project.Models.Game
             {
                 board.GetBoard();
 
-                human1 = new Human();
+                //human1 = new Human();
                 computer1 = new Computer();
                 players.Add(human1);
                 players.Add(computer1);
