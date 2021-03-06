@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Connect4_Web_Project.Models.Players.Difficulties;
+using Connect4_Web_Project.Models.Misc;
 
 namespace Connect4_Web_Project.Models.Players
 {
@@ -19,6 +20,8 @@ namespace Connect4_Web_Project.Models.Players
 
         public Computer(int newPieceKey, Difficulty newDifficulty, int[,] newInternalGrid)
         {
+            Name = Utilties.RandomName;
+            PlayerNum = newPieceKey;
             pieceKey = newPieceKey;
             difficulty = newDifficulty;
             internalGrid = newInternalGrid;

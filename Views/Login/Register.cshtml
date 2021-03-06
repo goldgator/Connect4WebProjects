@@ -4,6 +4,8 @@
     Layout = "~/Views/SharedData/_LayoutLoginAndRegister.cshtml";
 
 }
+<link href="~/CSS/register.css" rel="stylesheet" type="text/css" />
+<h2 style="padding-top: 100px;"></h2>
 <div class="row justify-content-md-center">
     <div class="col-md-5">
         @using (Html.BeginForm("Register", "Login", FormMethod.Post))
@@ -55,3 +57,4 @@
         }
     </div>
 </div>
+<h2 style="padding-top: 120px;"></h2>

@@ -5,22 +5,59 @@
         @{
             var boardArray = ViewBag.MyBoard;
 
+            @*Put all the board selections on screen if it is their turn*@
+            if (ViewBag.IsTurn)
+            {
+                <tr>
+                    @for (int col = 0; col < boardArray.GetLength(1); col++)
+                    {
+                        <td><input type="image" class="placePieceButton" value="@col" src="~/Images/downArrow.png" width="50" height="50" /></td>
+                    }
+                </tr>
+                <br />
+            }
+            else
+            {
+                <tr>
+                    @for (int col = 0; col < boardArray.GetLength(1); col++)
+                    {
+                        <td><div width="50" height="50"></div></td>
+                    }
+                </tr>
+                <br />
+            }
+
             for (int row = 0; row < boardArray.GetLength(0); row++)
             {
                 <tr>
                     @for (int col = 0; col < boardArray.GetLength(1); col++)
                     {
-                        if (boardArray[row, col] == 1)
+                        switch (boardArray[row, col])
                         {
-                            <td><img src="~/Images/redChip.png" width="50" height="50" /></td>
-                        }
-                        else if (boardArray[row, col] == 2)
-                        {
-                            <td><img src="~/Images/blueChip.png" width="50" height="50" /></td>
-                        }
-                        else
-                        {
-                            <td><img src="~/Images/blankChip.png" width="50" height="50" /></td>
+                            case 1:
+                                <td><img src="~/Images/redChip.png" width="50" height="50" /></td>
+                                break;
+                            case 2:
+                                <td><img src="~/Images/yellowChip.png" width="50" height="50" /></td>
+                                break;
+                            case 3:
+                                <td><img src="~/Images/blueChip.png" width="50" height="50" /></td>
+                                break;
+                            case 4:
+                                <td><img src="~/Images/greenChip.png" width="50" height="50" /></td>
+                                break;
+                            case 5:
+                                <td><img src="~/Images/orangeChip.png" width="50" height="50" /></td>
+                                break;
+                            case 6:
+                                <td><img src="~/Images/purpleChip.png" width="50" height="50" /></td>
+                                break;
+                            case 7:
+                                <td><img src="~/Images/pinkChip.png" width="50" height="50" /></td>
+                                break;
+                            default:
+                                <td><img src="~/Images/blankChip.png" width="50" height="50" /></td>
+                                break;
                         }
                     }
                     <br />

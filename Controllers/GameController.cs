@@ -26,24 +26,13 @@ namespace Connect4_Web_Project.Controllers
             return View();
         }
 
-        public ActionResult UpdateBoard(string column, string pieceKey, string connectionID)
+        public ActionResult UpdateBoard(string connectionID)
         {
-            bool parsed = int.TryParse(column, out int colNumber);
-            bool pieceParsed = int.TryParse(pieceKey, out int pieceNum);
-
-            colNumber -= 1;
-            ViewBag.ColumnNumber = colNumber;
-
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
             Board board = lobby.game.GetBoardInstance();
 
-            
-            
-            //Computer computer1 = new Computer(2, new Hard(), board.GetBoard());
-            //board.PlacePiece(computer1.MakeMove(board.GetBoard()), computer1.pieceKey);
-
-            //game.RunGame();
-
+            //Determines if player gets to place a piece or not
+            ViewBag.IsTurn = (lobby.game.GetPlayer(lobby.game.TurnInt).connectionID == connectionID);
             ViewBag.MyBoard = board.GetBoard();
 
             return PartialView("Grid", board);
