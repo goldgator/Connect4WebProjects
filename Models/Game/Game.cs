@@ -93,18 +93,18 @@ namespace Connect4_Web_Project.Models.Game
 
         public void RunGame()
         {
-            bool quit = false;
-            while (!quit)
-            {
-                board.GetBoard();
+            //bool quit = false;
+            //while (!quit)
+            //{
+            //    board.GetBoard();
 
-                //human1 = new Human();
-                computer1 = new Computer();
-                players.Add(human1);
-                players.Add(computer1);
+            //    human1 = new Human();
+            //    computer1 = new Computer();
+            //    players.Add(human1);
+            //    players.Add(computer1);
 
-                PlayGame();
-            }
+            //    PlayGame();
+            //}
         }
 
         public void PlayGame()
