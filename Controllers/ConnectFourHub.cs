@@ -208,7 +208,10 @@ namespace Connect4_Web_Project.Controllers
             string connectionID = Context.ConnectionId;
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
 
-            
+            if(lobby == null)
+            {
+                return base.OnDisconnected(stopCalled);
+            }            
 
             if (lobby.game.GetPlayerSize() == 2)
             {
