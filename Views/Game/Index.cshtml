@@ -6,7 +6,7 @@
 }
 <link href="~/CSS/game.css" rel="stylesheet" type="text/css" />
 
-<h2 style="padding-top: 200px;"></h2>
+<h2 style="padding-top: 100px;"></h2>
 
 <center>
     @*<input id="txtColInput" type="number" placeholder="Enter Column Number" disabled/>
@@ -32,6 +32,10 @@
                 </ul>
             </div>
         </div>
+        <div>
+            @*Display name and piece color stuff*@
+            <input id="displayNameInput" type="text" placeholder="Display Name"/>
+        </div>
     </div>
 
     <div id="messageBox">
@@ -50,9 +54,7 @@
 <input type="hidden" id="connectionIDHolder" />
 <input type="hidden" id="pieceColorHolder" />
 
-<script src="Scripts/jquery-3.0.0.min.js"></script>
-<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-<script src="signalr/hubs"></script>
+
 
 <script type="text/javascript">
     $(function () {
@@ -67,6 +69,7 @@
 
                 $(".placePieceButton").click(function () {
                     lobby.server.sendColGroup(this.value, $("#pieceValueHolder").val());
+                    //$("#pieceColorHolder").val(this.value);
                 });
             });
         }
@@ -100,7 +103,7 @@
                 $("#messageBox").html(response);
             });
 
-            $.connection.connectFourHub;
+            //$.connection.connectFourHub;
         }
 
         lobby.client.getLose = function (winnerName) {
@@ -126,28 +129,28 @@
         }
 
         //Dont Prompt. Get Profile Name.
-        $('#displayname').val(prompt('Enter your name:', ''));
-        $('#message').focus();
+        //$('#displayname').val(prompt('Enter your name:', ''));
+        //$('#message').focus();
 
         $.connection.hub.start().done(function () {
             //$("#enterCol").click(function () {
             //    lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
             //});
             $("#findMatchButton").click(function () {
-                lobby.server.joinMatchPlayer();
+                lobby.server.joinMatchPlayer($("#displayNameInput").val());
             });
             $("#easyButton").click(function () {
-                lobby.server.joinMatchAI("Easy");
+                lobby.server.joinMatchAI("Easy", $("#displayNameInput").val());
             });
             $("#mediumButton").click(function () {
-                lobby.server.joinMatchAI("Medium");
+                lobby.server.joinMatchAI("Medium", $("#displayNameInput").val());
             });
             $("#hardButton").click(function () {
-                lobby.server.joinMatchAI("Hard");
+                lobby.server.joinMatchAI("Hard", $("#displayNameInput").val());
             });
 
             $('#sendmessage').click(function () {
-                lobby.server.sendChatMessage($('#displayname').val(), $('#message').val());
+                lobby.server.sendChatMessage($('#message').val());
                 $('#message').val('').focus();
             });
         });
