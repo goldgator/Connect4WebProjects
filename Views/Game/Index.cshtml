@@ -12,7 +12,11 @@
     @*<input id="txtColInput" type="number" placeholder="Enter Column Number" disabled/>
     <button id="enterCol" type="button" disabled>Enter</button>*@
 
-    <div id="grid" style="width: 700px; height: 300px; padding: 20px">
+    <div id="grid" style="        width: 475px;
+        height: 400px;
+        padding: 20px;
+        background-color: #3A506B;
+">
         @*@Html.Partial("Grid", Model)*@
         <div style="width: 420px; height: 200px;">
             <div style="width: 200px; height: 200px; float:left">
@@ -53,6 +57,8 @@
 <input type="hidden" id="pieceValueHolder" />
 <input type="hidden" id="connectionIDHolder" />
 <input type="hidden" id="pieceColorHolder" />
+
+@*<script src="Scripts/jquery-3.0.0.min.js"></script>*@
 
 
 
@@ -165,3 +171,4 @@
     //    });
     //});
 </script>
+<h2 style="padding-top: 248px;"></h2>
