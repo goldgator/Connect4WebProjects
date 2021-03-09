@@ -6,7 +6,7 @@
 }
 <link href="~/CSS/game.css" rel="stylesheet" type="text/css" />
 
-<h2 style="padding-top: 200px;"></h2>
+<h2 style="padding-top: 100px;"></h2>
 
 <center>
     @*<input id="txtColInput" type="number" placeholder="Enter Column Number" disabled/>
@@ -36,6 +36,10 @@
                 </ul>
             </div>
         </div>
+        <div>
+            @*Display name and piece color stuff*@
+            <input id="displayNameInput" type="text" placeholder="Display Name"/>
+        </div>
     </div>
 
     <div id="messageBox">
@@ -57,6 +61,7 @@
 @*<script src="Scripts/jquery-3.0.0.min.js"></script>*@
 
 
+
 <script type="text/javascript">
     $(function () {
         //Declare proxy
@@ -70,6 +75,7 @@
 
                 $(".placePieceButton").click(function () {
                     lobby.server.sendColGroup(this.value, $("#pieceValueHolder").val());
+                    //$("#pieceColorHolder").val(this.value);
                 });
             });
         }
@@ -103,7 +109,7 @@
                 $("#messageBox").html(response);
             });
 
-            $.connection.connectFourHub;
+            //$.connection.connectFourHub;
         }
 
         lobby.client.getLose = function (winnerName) {
@@ -137,20 +143,20 @@
             //    lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
             //});
             $("#findMatchButton").click(function () {
-                lobby.server.joinMatchPlayer();
+                lobby.server.joinMatchPlayer($("#displayNameInput").val());
             });
             $("#easyButton").click(function () {
-                lobby.server.joinMatchAI("Easy");
+                lobby.server.joinMatchAI("Easy", $("#displayNameInput").val());
             });
             $("#mediumButton").click(function () {
-                lobby.server.joinMatchAI("Medium");
+                lobby.server.joinMatchAI("Medium", $("#displayNameInput").val());
             });
             $("#hardButton").click(function () {
-                lobby.server.joinMatchAI("Hard");
+                lobby.server.joinMatchAI("Hard", $("#displayNameInput").val());
             });
 
             $('#sendmessage').click(function () {
-                lobby.server.sendChatMessage($('#displayname').val(), $('#message').val());
+                lobby.server.sendChatMessage($('#message').val());
                 $('#message').val('').focus();
             });
         });
