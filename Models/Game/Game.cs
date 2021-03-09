@@ -39,6 +39,11 @@ namespace Connect4_Web_Project.Models.Game
             TurnInt = (TurnInt + 1) % players.Count;
         }
 
+        public Player GetPlayerUsingID(string connectionID)
+        {
+            return players.Find(ctx => ctx.connectionID == connectionID);
+        }
+
         public Player RemovePlayerUsingID(string connectionID, out int removeIndex)
         {
             removeIndex = players.FindIndex(ctx => ctx.connectionID == connectionID);

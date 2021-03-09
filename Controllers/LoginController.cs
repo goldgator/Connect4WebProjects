@@ -88,7 +88,7 @@ namespace Connect4_Web_Project.Controllers
             if (ModelState.IsValid)
             {
                 var f_password = GetMD5(_userLogin.Password);
-                var data = _entities.Users.Where(s => s.Username.Equals(_userLogin.Email) && s.Password.Equals(f_password)).ToList();
+                var data = _entities.Users.Where(s => s.Username.Equals(_userLogin.Username) && s.Password.Equals(f_password)).ToList();
                 if (data.Count() > 0)
                 {
                     //add session
