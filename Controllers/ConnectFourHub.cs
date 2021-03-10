@@ -157,6 +157,9 @@ namespace Connect4_Web_Project.Controllers
 
             Clients.Caller.setData("1", Context.ConnectionId);
 
+            //custom method to hide chat message box and button
+            //-------------------------------------------------
+
             switch (type)
             {
                 case "Easy":
@@ -183,8 +186,6 @@ namespace Connect4_Web_Project.Controllers
         {
             string connectionID = Context.ConnectionId;
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
-
-            
 
             if (lobby.game.GetPlayerSize() == 2)
             {
