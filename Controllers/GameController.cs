@@ -28,8 +28,14 @@ namespace Connect4_Web_Project.Controllers
 
         public ActionResult UpdateBoard(string connectionID)
         {
+          
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            if (lobby == null)
+            {
+                return PartialView("LoseBoard");
+            }
             Board board = lobby.game.GetBoardInstance();
+
 
             //Determines if player gets to place a piece or not
             ViewBag.IsTurn = (lobby.game.GetPlayer(lobby.game.TurnInt).connectionID == connectionID);

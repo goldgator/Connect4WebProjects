@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
-    <div class="navbar d-flex justify-content-start">
+    <div class="navbar d-flex justify-content-start" style="background-color: #0B132B;">
 
         <a href="~/Home"><i class="bi bi-house"></i> Home</a>
         <a href="~/game"><i class="bi bi-controller"></i> Play Connect Four</a>
@@ -37,14 +37,12 @@
     </div>
 
 
-
-
     @*-----------------------------------------------------------------------------------------------------*@
 
     <div class="container body-content">
         @RenderBody()
 
-        <footer style="padding-top: 250px;">
+        <footer style="padding-top: 50px;">
 
             <p>&copy; @DateTime.Now.Year - UltimateConnectFour.com</p>
         </footer>

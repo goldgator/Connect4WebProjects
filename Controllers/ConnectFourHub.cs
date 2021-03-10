@@ -10,6 +10,7 @@ using Connect4_Web_Project.Models.Players.Difficulties;
 using Connect4_Web_Project.Models.Misc;
 using static Connect4_Web_Project.Controllers.GroupManager;
 
+
 namespace Connect4_Web_Project.Controllers
 {
     public class ConnectFourHub : Hub
@@ -19,6 +20,17 @@ namespace Connect4_Web_Project.Controllers
             // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage(colString, pieceValue);
             
+        }
+
+        public void SendChatMessage(string message)
+        {
+            string connectionID = Context.ConnectionId;
+            GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+            string groupName = lobby.lobbyName;
+
+            string name = lobby.game.GetPlayerUsingID(connectionID).Name;
+
+            Clients.Group(groupName).addNewMessageToPage(name, message);
         }
 
         public void SendChatMessage(string name, string message)
@@ -68,7 +80,7 @@ namespace Connect4_Web_Project.Controllers
             {
                 //Call win board
                 Clients.Caller.getWin();
-                //Call lose board
+                //Call lose board, new page?
                 Clients.OthersInGroup(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
             }
 
@@ -79,10 +91,12 @@ namespace Connect4_Web_Project.Controllers
                 colInput = player.MakeMove(lobby.game.GetBoardInstance().GetBoard());
                 pieceKey = player.PlayerNum;
                 win = board.PlacePiece(colInput, pieceKey);
+                SendChatMessage("Place a piece on column " + (colInput + 1));
+                
 
                 if (win)
                 {
-                    //Call lose board
+                    //Call lose board, new page?
                     Clients.Group(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
                     //Leave loop
                     break;
@@ -125,8 +139,13 @@ namespace Connect4_Web_Project.Controllers
             return base.OnConnected();
         }
 
-        public void JoinMatchPlayer()
+        public void JoinMatchPlayer(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = Utilties.RandomName;
+            }
+
             GroupManager.Lobby lobby = GroupManager.FindOpenLobby();
             JoinRoom(lobby.lobbyName);
 
@@ -134,7 +153,7 @@ namespace Connect4_Web_Project.Controllers
             int pieceKey = lobby.game.GetPlayerSize() + 1;
             string pieceString = pieceKey + "";
             Clients.Caller.setData(pieceString, Context.ConnectionId);
-            lobby.game.AddPlayer(new Human(pieceKey, Context.ConnectionId));
+            lobby.game.AddPlayer(new Human(name, pieceKey, Context.ConnectionId));
 
             if (lobby.game.GetPlayerSize() == 2)
             {
@@ -147,9 +166,14 @@ namespace Connect4_Web_Project.Controllers
             
         }
 
-        public void JoinMatchAI(string type)
+        public void JoinMatchAI(string type, string name)
         {
-            Player newPlayer = new Human(1, Context.ConnectionId);
+            if (string.IsNullOrEmpty(name))
+            {
+                name = Utilties.RandomName;
+            }
+
+            Player newPlayer = new Human(name, 1, Context.ConnectionId);
             Player opponent = null;
 
             Lobby lobby = GroupManager.CreateLobbyWithPlayer(newPlayer);
@@ -186,6 +210,11 @@ namespace Connect4_Web_Project.Controllers
         {
             string connectionID = Context.ConnectionId;
             GroupManager.Lobby lobby = GroupManager.FindLobbyViaConnectionID(connectionID);
+
+            if(lobby == null)
+            {
+                return base.OnDisconnected(stopCalled);
+            }            
 
             if (lobby.game.GetPlayerSize() == 2)
             {
