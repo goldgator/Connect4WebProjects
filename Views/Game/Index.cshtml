@@ -29,7 +29,7 @@
     <button id="enterCol" type="button" disabled>Enter</button>*@
 
     <div id="grid" style="        width: 475px;
-        height: 400px;
+        height: auto;
         padding: 20px;
         background-color: #3A506B;
 ">
@@ -72,7 +72,7 @@
     <div id="messageBox">
     </div>
 
-    <div class="txtChat">
+    <div class="txtChat" hidden>
         <input type="text" id="message" placeholder="Enter Chat Message!" />
         <input type="button" id="sendmessage" value="Send" />
     </div>
@@ -85,7 +85,7 @@
 
 <input type="hidden" id="pieceValueHolder" />
 <input type="hidden" id="connectionIDHolder" />
-<input type="hidden" id="pieceColorHolder" />
+<input type="hidden" id="pieceColorHolder" value="0" />
 
 
 @*<script src="Scripts/jquery-3.0.0.min.js"></script>*@
@@ -97,6 +97,8 @@
 
         //Create a function that the hub can call to broacast messages
         lobby.client.updateBoard = function () {
+            $(".txtChat").prop('hidden', false);
+
             let text = "Game/UpdateBoard?connectionID=" + $("#connectionIDHolder").val();
             $.get(text, {}, function (response) {
                 $("#grid").html(response);
@@ -104,10 +106,6 @@
                 $(".placePieceButton").click(function () {
                     lobby.server.sendColGroup(this.value, $("#pieceValueHolder").val());
                     //$("#pieceColorHolder").val(this.value);
-                });
-
-                $(".chooseColorButton").click(function () {
-                    $("#pieceColorHolder").val(this.value);
                 });
             });
         }
@@ -175,21 +173,45 @@
             //    lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
             //});
             $("#findMatchButton").click(function () {
-                lobby.server.joinMatchPlayer($("#displayNameInput").val());
+                $("#messageBox").html("Connecting...");
+                $("#findMatchButton").prop('disabled', true);
+                $("#easyButton").prop('disabled', true);
+                $("#mediumButton").prop('disabled', true);
+                $("#hardButton").prop('disabled', true);
+                lobby.server.joinMatchPlayer($("#displayNameInput").val(), $("#pieceColorHolder").val());
             });
             $("#easyButton").click(function () {
-                lobby.server.joinMatchAI("Easy", $("#displayNameInput").val());
+                $("#messageBox").html("Connecting...");
+                $("#findMatchButton").prop('disabled', true);
+                $("#easyButton").prop('disabled', true);
+                $("#mediumButton").prop('disabled', true);
+                $("#hardButton").prop('disabled', true);
+                lobby.server.joinMatchAI("Easy", $("#displayNameInput").val(), $("#pieceColorHolder").val());
             });
             $("#mediumButton").click(function () {
-                lobby.server.joinMatchAI("Medium", $("#displayNameInput").val());
+                $("#messageBox").html("Connecting...");
+                $("#findMatchButton").prop('disabled', true);
+                $("#easyButton").prop('disabled', true);
+                $("#mediumButton").prop('disabled', true);
+                $("#hardButton").prop('disabled', true);
+                lobby.server.joinMatchAI("Medium", $("#displayNameInput").val(), $("#pieceColorHolder").val());
             });
             $("#hardButton").click(function () {
-                lobby.server.joinMatchAI("Hard", $("#displayNameInput").val());
+                $("#messageBox").html("Connecting...");
+                $("#findMatchButton").prop('disabled', true);
+                $("#easyButton").prop('disabled', true);
+                $("#mediumButton").prop('disabled', true);
+                $("#hardButton").prop('disabled', true);
+                lobby.server.joinMatchAI("Hard", $("#displayNameInput").val(), $("#pieceColorHolder").val());
             });
 
             $('#sendmessage').click(function () {
                 lobby.server.sendChatMessage($('#message').val());
                 $('#message').val('').focus();
+            });
+
+            $(".chooseColorButton").click(function () {
+                $("#pieceColorHolder").val(this.value);
             });
         });
     });

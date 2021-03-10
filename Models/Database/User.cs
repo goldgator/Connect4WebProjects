@@ -13,12 +13,7 @@ namespace Connect4_Web_Project.Models.Database
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int idUser { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string FirstName { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 3)] 
-        public string LastName { get; set; }
+        
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Username { get; set; }
@@ -29,9 +24,6 @@ namespace Connect4_Web_Project.Models.Database
         [Required]
         [System.ComponentModel.DataAnnotations.Compare("Password")]
         public string ConfirmPassword { get; set; }
-        public string FullName()
-        {
-            return this.FirstName + " " + this.LastName;
-        }
+        
     }
 }
