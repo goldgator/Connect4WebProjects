@@ -6,13 +6,33 @@
 }
 <link href="~/CSS/game.css" rel="stylesheet" type="text/css" />
 
-<h2 style="padding-top: 200px;"></h2>
+<h2 style="padding-top: 100px;"></h2>
+<style type="text/css">
+    .txtChat{
+        padding-top: 110px;
+    }
+    .messageArea {
+        padding-top: 10px;
+        overflow: auto;
+        list-style: none;
+        height: 100px;
+    }
+    .colorDiv
+    {
+        font-size:24px;
+    }
+</style>
+
 
 <center>
     @*<input id="txtColInput" type="number" placeholder="Enter Column Number" disabled/>
     <button id="enterCol" type="button" disabled>Enter</button>*@
 
-    <div id="grid" style="width: 700px; height: 300px; padding: 20px">
+    <div id="grid" style="        width: 475px;
+        height: 400px;
+        padding: 20px;
+        background-color: #3A506B;
+">
         @*@Html.Partial("Grid", Model)*@
         <div style="width: 420px; height: 200px;">
             <div style="width: 200px; height: 200px; float:left">
@@ -21,10 +41,10 @@
             <div style="width: 200px; height: 200px; float:right">
                 <ul style="list-style:none">
                     <li>
-                        <button id="easyButton" value="Easy AI"  style="width: 180px; height: 53px; padding: 5%">Easy</button>
+                        <button id="easyButton" value="Easy AI" style="width: 180px; height: 53px; padding: 5%">Easy</button>
                     </li>
                     <li>
-                        <button id="mediumButton" value="Medium AI"  style="width: 180px; height: 53px; padding: 5%">Medium</button>
+                        <button id="mediumButton" value="Medium AI" style="width: 180px; height: 53px; padding: 5%">Medium</button>
                     </li>
                     <li>
                         <button id="hardButton" value="Hard AI" style="width: 180px; height: 53px; padding: 5%">Hard</button>
@@ -32,14 +52,31 @@
                 </ul>
             </div>
         </div>
+
+        <div class="colorDiv">Choose Your Color!</div>
+        <input type="image" class="chooseColorButton" value="1" src="~/Images/redChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="2" src="~/Images/blueChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="3" src="~/Images/greenChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="4" src="~/Images/yellowChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="5" src="~/Images/orangeChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="6" src="~/Images/pinkChip.png" width="100" height="100" />
+        <input type="image" class="chooseColorButton" value="7" src="~/Images/purpleChip.png" width="100" height="100" />
+  
+        <div>
+            @*Display name and piece color stuff*@
+            <input id="displayNameInput" type="text" placeholder="Display Name"/>
+        </div>
+
     </div>
 
     <div id="messageBox">
     </div>
 
-    <div class="container">
-        <input type="text" id="message" />
+    <div class="txtChat">
+        <input type="text" id="message" placeholder="Enter Chat Message!" />
         <input type="button" id="sendmessage" value="Send" />
+    </div>
+    <div class="messageArea">
         <input type="hidden" id="displayname" />
         <ul id="discussion">
         </ul>
@@ -50,9 +87,8 @@
 <input type="hidden" id="connectionIDHolder" />
 <input type="hidden" id="pieceColorHolder" />
 
-<script src="Scripts/jquery-3.0.0.min.js"></script>
-<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-<script src="signalr/hubs"></script>
+
+@*<script src="Scripts/jquery-3.0.0.min.js"></script>*@
 
 <script type="text/javascript">
     $(function () {
@@ -67,6 +103,11 @@
 
                 $(".placePieceButton").click(function () {
                     lobby.server.sendColGroup(this.value, $("#pieceValueHolder").val());
+                    //$("#pieceColorHolder").val(this.value);
+                });
+
+                $(".chooseColorButton").click(function () {
+                    $("#pieceColorHolder").val(this.value);
                 });
             });
         }
@@ -100,7 +141,7 @@
                 $("#messageBox").html(response);
             });
 
-            $.connection.connectFourHub;
+            //$.connection.connectFourHub;
         }
 
         lobby.client.getLose = function (winnerName) {
@@ -126,28 +167,28 @@
         }
 
         //Dont Prompt. Get Profile Name.
-        $('#displayname').val(prompt('Enter your name:', ''));
-        $('#message').focus();
+        //$('#displayname').val(prompt('Enter your name:', ''));
+        //$('#message').focus();
 
         $.connection.hub.start().done(function () {
             //$("#enterCol").click(function () {
             //    lobby.server.sendColGroup($("#txtColInput").val(), $("#pieceValueHolder").val());
             //});
             $("#findMatchButton").click(function () {
-                lobby.server.joinMatchPlayer();
+                lobby.server.joinMatchPlayer($("#displayNameInput").val());
             });
             $("#easyButton").click(function () {
-                lobby.server.joinMatchAI("Easy");
+                lobby.server.joinMatchAI("Easy", $("#displayNameInput").val());
             });
             $("#mediumButton").click(function () {
-                lobby.server.joinMatchAI("Medium");
+                lobby.server.joinMatchAI("Medium", $("#displayNameInput").val());
             });
             $("#hardButton").click(function () {
-                lobby.server.joinMatchAI("Hard");
+                lobby.server.joinMatchAI("Hard", $("#displayNameInput").val());
             });
 
             $('#sendmessage').click(function () {
-                lobby.server.sendChatMessage($('#displayname').val(), $('#message').val());
+                lobby.server.sendChatMessage($('#message').val());
                 $('#message').val('').focus();
             });
         });
@@ -162,3 +203,4 @@
     //    });
     //});
 </script>
+<h2 style="padding-top: 248px;"></h2>
