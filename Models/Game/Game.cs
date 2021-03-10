@@ -39,6 +39,11 @@ namespace Connect4_Web_Project.Models.Game
             TurnInt = (TurnInt + 1) % players.Count;
         }
 
+        public Player GetPlayerUsingID(string connectionID)
+        {
+            return players.Find(ctx => ctx.connectionID == connectionID);
+        }
+
         public Player RemovePlayerUsingID(string connectionID, out int removeIndex)
         {
             removeIndex = players.FindIndex(ctx => ctx.connectionID == connectionID);
@@ -93,18 +98,18 @@ namespace Connect4_Web_Project.Models.Game
 
         public void RunGame()
         {
-            bool quit = false;
-            while (!quit)
-            {
-                board.GetBoard();
+            //bool quit = false;
+            //while (!quit)
+            //{
+            //    board.GetBoard();
 
-                //human1 = new Human();
-                computer1 = new Computer();
-                players.Add(human1);
-                players.Add(computer1);
+            //    human1 = new Human();
+            //    computer1 = new Computer();
+            //    players.Add(human1);
+            //    players.Add(computer1);
 
-                PlayGame();
-            }
+            //    PlayGame();
+            //}
         }
 
         public void PlayGame()

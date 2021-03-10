@@ -3,7 +3,7 @@
 <center>
     <h1>
         @{
-            var boardArray = ViewBag.MyBoard;
+            int[,] boardArray = ViewBag.MyBoard;
 
             @*Put all the board selections on screen if it is their turn*@
             if (ViewBag.IsTurn)

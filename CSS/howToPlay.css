@@ -20,5 +20,6 @@ p, div {
 }
 
 body {
-    background: url(/Images/cream_dust.png) repeat 0 0;
+    background-color: #1C2541;
+    color: #D2F2F2;
 }

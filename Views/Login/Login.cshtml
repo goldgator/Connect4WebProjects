@@ -16,10 +16,10 @@
                 {
                     @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username)
-                    @Html.TextBoxFor(m => m.Username, "", new { @class = "form-control", @placeholder = "Username" })
-                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "badge badge-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username)
+                        @Html.TextBoxFor(m => m.Username, "", new { @class = "form-control", @placeholder = "Username" })
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "badge badge-danger" })
 
 
                     </div>
