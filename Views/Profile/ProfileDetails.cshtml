@@ -5,38 +5,27 @@
     Layout = "~/Views/SharedData/_LayoutPage.cshtml";
 }
 
-<h2>ProfileDetails</h2>
+<h2>Welcome to Your Profile Page</h2>
+
+<button>
+    <content ="Logout" onclick="">
+</button>
 
 <div>
     <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Username)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Username);
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+       
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idUser }) |
+    @Html.ActionLink("Log out", "Edit", new { id = Model.idUser }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

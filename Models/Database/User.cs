@@ -20,7 +20,7 @@ namespace Connect4_Web_Project.Models.Database
         [StringLength(50, MinimumLength = 3)] 
         public string LastName { get; set; }
         [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Username { get; set; }
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
