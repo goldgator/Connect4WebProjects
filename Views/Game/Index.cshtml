@@ -21,6 +21,14 @@
     {
         font-size:24px;
     }
+    .playButton {
+        border-style: groove;
+        border-color: aqua;
+        border-width: thick;
+        border-radius: 4px;
+        background-color: #2A405B;
+        color: #D2F2F2;
+    }
 </style>
 
 
@@ -36,18 +44,18 @@
         @*@Html.Partial("Grid", Model)*@
         <div style="width: 420px; height: 200px;">
             <div style="width: 200px; height: 200px; float:left">
-                <button id="findMatchButton" value="Find Match" style="width: 90%; height: 90%">Find Match</button>
+                <button id="findMatchButton" class="playButton" value="Find Match" style="width: 90%; height: 90%">Find Match</button>
             </div>
             <div style="width: 200px; height: 200px; float:right">
                 <ul style="list-style:none">
                     <li>
-                        <button id="easyButton" value="Easy AI" style="width: 180px; height: 53px; padding: 5%">Easy</button>
+                        <button id="easyButton" class="playButton" value="Easy AI" style="width: 180px; height: 58px; ">Easy</button>
                     </li>
                     <li>
-                        <button id="mediumButton" value="Medium AI" style="width: 180px; height: 53px; padding: 5%">Medium</button>
+                        <button id="mediumButton" class="playButton" value="Medium AI" style="width: 180px; height: 58px; ">Medium</button>
                     </li>
                     <li>
-                        <button id="hardButton" value="Hard AI" style="width: 180px; height: 53px; padding: 5%">Hard</button>
+                        <button id="hardButton" class="playButton" value="Hard AI" style="width: 180px; height: 58px; ">Hard</button>
                     </li>
                 </ul>
             </div>

@@ -71,7 +71,8 @@ namespace Connect4_Web_Project.Controllers
             }
 
             bool win = board.PlacePiece(colInput, pieceKey);
-            lobby.game.NextTurn();
+            SendChatMessage("Placed a piece on column " + (colInput + 1));
+            if (!win) lobby.game.NextTurn();
 
             Clients.Caller.takeInputAccess();
 
@@ -82,6 +83,7 @@ namespace Connect4_Web_Project.Controllers
                 Clients.Caller.getWin();
                 //Call lose board, new page?
                 Clients.OthersInGroup(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
+                Clients.Group(groupName).takeInputAccess();
             }
 
             //Do computer turns if there
@@ -91,13 +93,14 @@ namespace Connect4_Web_Project.Controllers
                 colInput = player.MakeMove(lobby.game.GetBoardInstance().GetBoard());
                 pieceKey = player.PlayerNum;
                 win = board.PlacePiece(colInput, pieceKey);
-                SendChatMessage("Place a piece on column " + (colInput + 1));
+                SendChatMessage("Placed a piece on column " + (colInput + 1));
                 
 
                 if (win)
                 {
                     //Call lose board, new page?
                     Clients.Group(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
+                    Clients.Group(groupName).takeInputAccess();
                     //Leave loop
                     break;
                 }
@@ -165,6 +168,7 @@ namespace Connect4_Web_Project.Controllers
 
             if (lobby.game.GetPlayerSize() == 2)
             {
+                Clients.Group(lobby.lobbyName).message("");
                 Clients.OthersInGroup(lobby.lobbyName).giveInputAccess();
                 Clients.Group(lobby.lobbyName).updateBoard();
             } else
