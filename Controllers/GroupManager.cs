@@ -23,11 +23,11 @@ namespace Connect4_Web_Project.Controllers
 
         public static List<Lobby> lobbies { get; set; } = new List<Lobby>();
 
-        public static Lobby FindOpenLobby()
+        public static Lobby FindOpenLobby(int pieceKey)
         {
             foreach (Lobby l in lobbies)
             {
-                if (l.game.GetPlayerSize() < 2)
+                if (l.game.GetPlayerSize() < 2 && l.game.GetPlayer(0).PlayerNum != pieceKey)
                 {
                     return l;
                 }

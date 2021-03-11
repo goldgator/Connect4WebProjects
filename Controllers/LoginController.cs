@@ -92,7 +92,7 @@ namespace Connect4_Web_Project.Controllers
                 if (data.Count() > 0)
                 {
                     //add session
-                    Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
+
                     Session["Username"] = data.FirstOrDefault().Username;
                     Session["idUser"] = data.FirstOrDefault().idUser;
                     return RedirectToAction("Index", "Home");

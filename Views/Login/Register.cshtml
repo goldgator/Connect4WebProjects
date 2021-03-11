@@ -18,17 +18,7 @@
                     <div class="card-title">Register</div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.FirstName)
-                        @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control", @placeholder = "First Name" })
-                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "badge badge-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LastName)
-                        @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control", @placeholder = "Last Name" })
-                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "badge badge-danger" })
-
-                    </div>
+                    
                     <div class="form-group">
                         @Html.LabelFor(m => m.Username)
                         @Html.TextBoxFor(m => m.Username, "", new { @class = "form-control", @placeholder = "Username" })
