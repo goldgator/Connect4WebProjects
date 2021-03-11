@@ -71,7 +71,8 @@ namespace Connect4_Web_Project.Controllers
             }
 
             bool win = board.PlacePiece(colInput, pieceKey);
-            lobby.game.NextTurn();
+            SendChatMessage("Placed a piece on column " + (colInput + 1));
+            if (!win) lobby.game.NextTurn();
 
             Clients.Caller.takeInputAccess();
 
@@ -82,6 +83,7 @@ namespace Connect4_Web_Project.Controllers
                 Clients.Caller.getWin();
                 //Call lose board, new page?
                 Clients.OthersInGroup(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
+                Clients.Group(groupName).takeInputAccess();
             }
 
             //Do computer turns if there
@@ -91,13 +93,14 @@ namespace Connect4_Web_Project.Controllers
                 colInput = player.MakeMove(lobby.game.GetBoardInstance().GetBoard());
                 pieceKey = player.PlayerNum;
                 win = board.PlacePiece(colInput, pieceKey);
-                SendChatMessage("Place a piece on column " + (colInput + 1));
+                SendChatMessage("Placed a piece on column " + (colInput + 1));
                 
 
                 if (win)
                 {
                     //Call lose board, new page?
                     Clients.Group(groupName).getLose(lobby.game.GetPlayer(lobby.game.TurnInt).Name);
+                    Clients.Group(groupName).takeInputAccess();
                     //Leave loop
                     break;
                 }
@@ -139,24 +142,33 @@ namespace Connect4_Web_Project.Controllers
             return base.OnConnected();
         }
 
-        public void JoinMatchPlayer(string name)
+        public void JoinMatchPlayer(string name, string newPieceKey)
         {
             if (string.IsNullOrEmpty(name))
             {
                 name = Utilties.RandomName;
             }
 
-            GroupManager.Lobby lobby = GroupManager.FindOpenLobby();
+            int pieceKey = -1;
+            bool success = int.TryParse(newPieceKey, out pieceKey);
+
+            if (pieceKey == 0)
+            {
+                Random rng = new Random();
+                pieceKey = rng.Next(1, 8);
+            }
+
+            GroupManager.Lobby lobby = GroupManager.FindOpenLobby(pieceKey);
             JoinRoom(lobby.lobbyName);
 
 
-            int pieceKey = lobby.game.GetPlayerSize() + 1;
             string pieceString = pieceKey + "";
             Clients.Caller.setData(pieceString, Context.ConnectionId);
             lobby.game.AddPlayer(new Human(name, pieceKey, Context.ConnectionId));
 
             if (lobby.game.GetPlayerSize() == 2)
             {
+                Clients.Group(lobby.lobbyName).message("");
                 Clients.OthersInGroup(lobby.lobbyName).giveInputAccess();
                 Clients.Group(lobby.lobbyName).updateBoard();
             } else
@@ -166,37 +178,51 @@ namespace Connect4_Web_Project.Controllers
             
         }
 
-        public void JoinMatchAI(string type, string name)
+        public void JoinMatchAI(string type, string name, string newPieceKey)
         {
             if (string.IsNullOrEmpty(name))
             {
                 name = Utilties.RandomName;
             }
 
-            Player newPlayer = new Human(name, 1, Context.ConnectionId);
+            int pieceKey = -1;
+            bool success = int.TryParse(newPieceKey, out pieceKey);
+            Random rng = new Random();
+            if (pieceKey == 0)
+            {
+                pieceKey = rng.Next(1, 8);
+            }
+
+            Player newPlayer = new Human(name, pieceKey, Context.ConnectionId);
             Player opponent = null;
 
             Lobby lobby = GroupManager.CreateLobbyWithPlayer(newPlayer);
             JoinRoom(lobby.lobbyName);
 
-            Clients.Caller.setData("1", Context.ConnectionId);
+            Clients.Caller.setData(pieceKey.ToString(), Context.ConnectionId);
 
             //custom method to hide chat message box and button
             //-------------------------------------------------
+
+            int computerKey = 0;
+            do
+            {
+                computerKey = rng.Next(1, 8);
+            } while (computerKey == pieceKey);
 
             switch (type)
             {
                 case "Easy":
                     Easy easy = new Easy();
-                    opponent = new Computer(2, easy, lobby.game.GetBoardInstance().GetBoard());
+                    opponent = new Computer(computerKey, easy, lobby.game.GetBoardInstance().GetBoard());
                     break;
                 case "Medium":
                     Medium medium = new Medium();
-                    opponent = new Computer(2, medium, lobby.game.GetBoardInstance().GetBoard());
+                    opponent = new Computer(computerKey, medium, lobby.game.GetBoardInstance().GetBoard());
                     break;
                 case "Hard":
                     Hard hard = new Hard();
-                    opponent = new Computer(2, hard, lobby.game.GetBoardInstance().GetBoard());
+                    opponent = new Computer(computerKey, hard, lobby.game.GetBoardInstance().GetBoard());
                     break;
             }
 
